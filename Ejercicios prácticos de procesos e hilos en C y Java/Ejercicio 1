@@ -1,8 +1,19 @@
 #include <stdio.h>
+#include <sys/types.h>
 #include <unistd.h>
 main() {
     pid_t p;
+    /*wait(&status);  Aqui el proceso hijo se convierte en zombie cuando el padre termina sin usar wait, 
+    agregar el wait en el proceso padre evita que el proceso hijo se convierta en zombie*/
     p = fork();
-    if (p != 0) while (1) sleep(1000);
-    else exit (2);
+
+    if (p != 0) {
+        while (1) sleep(1000);
+    } else {
+    exit (2);
+    }
+    return 0;
 }
+
+/*compilamos usando gcc -o programa programa.c*/
+/*ejecutamos usando ps aux | grep programa*/
