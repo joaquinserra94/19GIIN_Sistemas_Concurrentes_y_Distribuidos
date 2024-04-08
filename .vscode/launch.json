@@ -3,5 +3,13 @@
     // Mantenga el puntero para ver las descripciones de los existentes atributos.
     // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ThreadDemo",
+            "request": "launch",
+            "mainClass": "ThreadDemo",
+            "projectName": "19GIIN_Sistemas_Concurrentes_y_Distribuidos_1536b372"
+        }
+    ]
 }

@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
+#define NUM_THREADS 5
+void *hiloDormilon( ) {
+ printf("\n Soy un hilo -- Deberia hacer algo util -- Por ahora solo duermo \n");
+ sleep(10);
+ pthread_exit(NULL);
+}
+void main(int argc, char *argv[]) {
+ pthread_t threads[NUM_THREADS];
+ int rc, t;
+ for (t=0; t < NUM_THREADS; t++) {
+ rc = pthread_create(&threads[t],NULL,(void *)hiloDormilon, NULL);
+ if (rc) {
+ printf("Error, %d\n",rc);
+ exit(-1);
+ }
+ printf("Creado thread %d, con ID=%ld\n",t,threads[t]);
+}
+for (t=0; t < NUM_THREADS; t++) {
+ pthread_join(threads[t],NULL);
+ printf("Termino el thread %ld\n",threads[t]);
+}
+}
