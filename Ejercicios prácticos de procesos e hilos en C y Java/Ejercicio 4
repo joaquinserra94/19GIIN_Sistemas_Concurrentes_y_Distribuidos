@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+void main(int argc, char *argv[]) {
+  int i, n;
+  pid_t hijopid;
+
+  if (argc != 2) {
+    fprintf(stderr, "USO: %s num_procesos\n", argv[0]);
+    exit(1);
+  }
+
+  n = atoi(argv[1]);
+
+  // Crear la cadena de tres procesos
+  for (i = 0; i < n; i++) {
+    hijopid = fork();
+    if (hijopid == -1) {
+      perror("error al ejecutar el fork");
+      exit(1);
+    } else if (hijopid == 0) {
+      // Código del proceso hijo
+      if (i == n - 1) {
+        // Crear un abanico de tres procesos
+        for (int j = 0; j < 3; j++) {
+          pid_t nieto_pid = fork();
+          if (nieto_pid == -1) {
+            perror("error al ejecutar el fork");
+            exit(1);
+          } else if (nieto_pid == 0) {
+            // Código del proceso nieto
+            fprintf(stdout, "i:%d proceso nieto - %ld Id del padre - %ld ID del hijo\n", j, (long)getppid(), (long)getpid());
+            exit(0);
+          }
+        }
+      } else {
+        // Esperar a que el hijo termine
+        wait(NULL);
+      }
+      fprintf(stdout, "i:%d proceso - %ld Id del padre - %ld ID del hijo\n", i, (long)getppid(), (long)getpid());
+      exit(0);
+    }
+  }
+
+  // El padre espera a que todos sus hijos terminen
+  for (i = 0; i < n; i++) {
+    wait(NULL);
+  }
+
+  exit(0);
+}
+
+/*El programa comienza leyendo el número de procesos que se desea crear como argumento.
+Luego, crea una cadena de n procesos.
+El último proceso de la cadena crea un abanico de 3 procesos.
+Todos los procesos imprimen su ID, el ID de su padre y un contador que indica su posición.
+El padre espera a que todos sus hijos terminen antes de terminar él mismo.*/

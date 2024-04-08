@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() {
+  pid_t p;
+  p = fork();
+  if (p != 0) {
+    wait(NULL);
+    printf("Proceso padre terminado\n");
+  } else {
+    printf("Proceso hijo terminado\n");
+    exit(2);
+  }
+  return 0;
+}
+
+/*¿Que hace el programa?
+El programa utiliza una función fork() para crear un proceso hijo. El proceso padre entra en un bucle infinito y no es posible finalizar la ejecución del programa.
+¿Que función tiene la librería sys/types.h?
+La biblioteca sys/types.h define varios tipos de datos utilizados por el sistema operativo, incluyendo el tipo pid_t que se utiliza para almacenar el identificador de un proceso.
+
+Ejecución del programa en segundo plano
+
+Para ejecutar el programa en segundo plano, lo haremos agregando & al final. 
+Es decir: ./programa1& 
+Para ver la lista de procesos lo haremos con ps aux
+*/

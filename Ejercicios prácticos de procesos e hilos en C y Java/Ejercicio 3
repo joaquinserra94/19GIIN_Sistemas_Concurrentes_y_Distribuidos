@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+  static char *cmd[]={"who","ls","date"};
+  int i;
+  while (1) {
+    printf("0=who, 1=ls, 2=date\n");
+    scanf("%d",&i);
+    if (i<0 || i>2) exit(1);
+    if (fork() == 0) {
+      execlp(cmd[i], cmd[i], 0);
+      printf("Comando no se encontro\n");
+      exit(1);
+    }
+    else wait(0);
+  }
+}
+
+/*El programa presenta un menú al usuario con tres opciones: who, ls y date. El usuario elige una opción y el programa ejecuta el comando correspondiente. Si el comando no se encuentra, el programa muestra un mensaje de error y termina.
+*/
