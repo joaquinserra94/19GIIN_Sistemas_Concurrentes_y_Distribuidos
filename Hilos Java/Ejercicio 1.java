@@ -36,3 +36,15 @@ class NewThread implements Runnable {
     System.out.println("Sale de hilo principal.");
     }
    }
+
+// Path: Hilos%20Java/Ejercicio%202.java
+// Compare this snippet from Hilos%20Java/Ejercicio%1.java:
+// // Esta es la clase hilo
+// class NewThread implements Runnable {
+//     Thread t;
+//     NewThread() {
+//     // Crea un nuevo hilo
+//     t = new Thread(this,"Hilo Hijo");
+//     System.out.println("Hilo Hijo: " + t);
+//     t.start();
+//     }
