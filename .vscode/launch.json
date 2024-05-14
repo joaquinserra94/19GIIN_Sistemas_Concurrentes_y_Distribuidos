@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PC",
+            "request": "launch",
+            "mainClass": "PC",
+            "projectName": "19GIIN_Sistemas_Concurrentes_y_Distribuidos_1536b372"
+        },
+        {
+            "type": "java",
             "name": "ThreadDemo",
             "request": "launch",
             "mainClass": "ThreadDemo",
