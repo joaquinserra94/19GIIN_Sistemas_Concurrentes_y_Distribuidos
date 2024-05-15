@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PCFijo",
+            "request": "launch",
+            "mainClass": "PCFijo",
+            "projectName": "19GIIN_Sistemas_Concurrentes_y_Distribuidos_1536b372"
+        },
+        {
+            "type": "java",
             "name": "PC",
             "request": "launch",
             "mainClass": "PC",
